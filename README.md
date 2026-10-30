@@ -1,99 +1,65 @@
-# lichess-bot
-A bridge between [Lichess API](https://lichess.org/api#tag/Chess-Bot) and bots.
+<div align="center">
 
+  ![lichess-bot](https://github.com/lichess-bot-devs/lichess-bot-images/blob/main/lichess-bot-icon-400.png)
 
-## How to Install
+  <h1>lichess-bot</h1>
 
-### Mac/Linux:
-- NOTE: Only Python 3 is supported!
-- Download the repo into lichess-bot directory
-- Navigate to the directory in cmd/Terminal: `cd lichess-bot`
-- Install virtualenv: `pip install virtualenv`
-- Setup virtualenv:
-```
-virtualenv .venv -p python3 #if this fails you probably need to add Python3 to your PATH
-source .venv/bin/activate
-pip install -r requirements.txt
-```
-- Copy `config.yml.default` to `config.yml`
-- Edit the variants: `supported_variants` and time controls: `supported_tc` from the config.yml as necessary
+  A bridge between [lichess.org](https://lichess.org) and bots.
+  <br>
+  <strong>[Explore lichess-bot docs »](https://github.com/lichess-bot-devs/lichess-bot/wiki)</strong>
+  <br>
+  <br>
+  [![Python Build](https://github.com/lichess-bot-devs/lichess-bot/actions/workflows/python-build.yml/badge.svg)](https://github.com/lichess-bot-devs/lichess-bot/actions/workflows/python-build.yml)
+  [![Python Test](https://github.com/lichess-bot-devs/lichess-bot/actions/workflows/python-test.yml/badge.svg)](https://github.com/lichess-bot-devs/lichess-bot/actions/workflows/python-test.yml)
+  [![Mypy](https://github.com/lichess-bot-devs/lichess-bot/actions/workflows/mypy.yml/badge.svg)](https://github.com/lichess-bot-devs/lichess-bot/actions/workflows/mypy.yml)
 
-### Windows:
-- Here is a video on how to install the bot: (https://youtu.be/w-aJFk00POQ). Or you may proceed to the next steps.
-- NOTE: Only Python 3 is supported!
-- If you don't have Python, you may download it here: (https://www.python.org/downloads/). When installing it, enable "add Python to PATH", then go to custom installation (this may be not necessary, but on some computers it won't work otherwise) and enable all options (especially "install for all users"), except the last . It's better to install Python in a path without spaces, like "C:\Python\".
-- To type commands it's better to use PowerShell. Go to Start menu and type "PowerShell" (you may use cmd too, but sometimes it may not work).
-- Then you may need to upgrade pip. Execute "python -m pip install --upgrade pip" in PowerShell.
-- Download the repo into lichess-bot directory.
-- Navigate to the directory in PowerShell: `cd [folder's adress]` (like "cd C:\chess\lichess-bot").
-- Install virtualenv: `pip install virtualenv`.
-- Setup virtualenv:
-```
-virtualenv .venv -p python (if this fails you probably need to add Python to your PATH)
-./.venv/Scripts/activate (.\.venv\Scripts\activate should work in cmd in administator mode) (This may not work on Windows, and in this case you need to execute "Set-ExecutionPolicy RemoteSigned" first and choose "Y" there [you may need to run Powershell as administrator]. After you executed the script, change execution policy back with "Set-ExecutionPolicy Restricted" and pressing "Y")
-pip install -r requirements.txt
-```
-- Copy `config.yml.default` to `config.yml`
-- Edit the variants: `supported_variants` and time controls: `supported_tc` from the config.yml as necessary (use # to disable certain ones)
+</div>
 
+## Overview
 
-## Lichess OAuth
-- Create an account for your bot on [Lichess.org](https://lichess.org/signup)
-- NOTE: If you have previously played games on an existing account, you will not be able to use it as a bot account
-- Once your account has been created and you are logged in, [create a personal OAuth2 token](https://lichess.org/account/oauth/token/create) with the "Play as a bot" selected and add a description
-- A `token` e.g. `Xb0ddNrLabc0lGK2` will be displayed. Store this in `config.yml` as the `token` field
-- NOTE: You won't see this token again on Lichess.
+[lichess-bot](https://github.com/lichess-bot-devs/lichess-bot) is a free bridge
+between the [Lichess Bot API](https://lichess.org/api#tag/Bot) and chess engines.
 
+With lichess-bot, you can create and operate a bot on lichess. Your bot will be able to play against humans and bots alike, and you will be able to view these games live on lichess.
 
-## Setup Engine
-- Place your engine(s) in the `engine.dir` directory
-- In `config.yml`, enter the binary name as the `engine.name` field (In Windows you may need to type a name with ".exe", like "lczero.exe")
-- Leave the `weights` field empty or see LeelaChessZero section for Neural Nets
+See also the lichess-bot [documentation](https://github.com/lichess-bot-devs/lichess-bot/wiki) for further usage help.
 
+## Features
+Supports:
+- Every variant and time control
+- UCI, XBoard, and Homemade engines
+- Matchmaking (challenging other bots)
+- Offering Draws and Resigning
+- Participating in tournaments
+- Accepting move takeback requests from opponents
+- Saving games as PGN
+- Local & Online Opening Books
+- Local & Online Endgame Tablebases
 
-## Lichess Upgrade to Bot Account
-**WARNING** This is irreversible. [Read more about upgrading to bot account](https://lichess.org/api#operation/botAccountUpgrade).
-- run `python lichess-bot.py -u`
+Can run on:
+- Python 3.10 and later
+- Windows, Linux and MacOS
+- Docker
 
-## To Quit
-- Press CTRL+C
-- It may take some time to quit
+## Steps
+1. [Install lichess-bot](https://github.com/lichess-bot-devs/lichess-bot/wiki/How-to-Install)
+2. [Create a lichess OAuth token](https://github.com/lichess-bot-devs/lichess-bot/wiki/How-to-create-a-Lichess-OAuth-token)
+3. [Setup the engine](https://github.com/lichess-bot-devs/lichess-bot/wiki/Setup-the-engine)
+4. [Configure lichess-bot](https://github.com/lichess-bot-devs/lichess-bot/wiki/Configure-lichess-bot)
+5. [Upgrade to a BOT account](https://github.com/lichess-bot-devs/lichess-bot/wiki/Upgrade-to-a-BOT-account)
+6. [Run lichess-bot](https://github.com/lichess-bot-devs/lichess-bot/wiki/How-to-Run-lichess%E2%80%90bot)
 
-## LeelaChessZero
-- Download the weights for the id you want to play from here: http://lczero.org/networks
-- Extract the weights from the zip archive and rename it to `latest.txt`
-- For Windows, download the lczero binary from https://github.com/glinscott/leela-chess/releases
-- For Mac/Linux, build the lczero binary yourself following [LeelaChessZero/lc0/README](https://github.com/LeelaChessZero/lc0/blob/master/README.md)
-- Copy both the files into the `engine.dir` directory
-- Change the `engine.name` and `engine.weights` keys in config.yml to `lczero` (`lczero.exe` for Windows)  and `latest.txt`
-- You can specify the number of `engine.threads` in the config.yml file as well
-- To start: `python lichess-bot.py`
+## Advanced options
+- [Create a homemade engine](https://github.com/lichess-bot-devs/lichess-bot/wiki/Create-a-homemade-engine)
+- [Add extra customizations](https://github.com/lichess-bot-devs/lichess-bot/wiki/Extra-customizations)
 
+<br />
 
-## Tips & Tricks
-- You can specify a different config file with the `--config` argument.
-- Here's an example systemd service definition:
-```
-[Unit]
-Description=lichess-bot
-After=network-online.target
-Wants=network-online.target
+## Acknowledgements
+Thanks to the Lichess team, especially T. Alexander Lystad and Thibault Duplessis for working with the LeelaChessZero team to get this API up. Thanks to [Niklas Fiekas](https://github.com/niklasf) and his [python-chess](https://github.com/niklasf/python-chess) code which allows engine communication seamlessly.
 
-[Service]
-Environment="PYTHONUNBUFFERED=1"
-ExecStart=/usr/bin/python3 /home/thibault/lichess-bot/lichess-bot.py
-WorkingDirectory=/home/thibault/lichess-bot/
-User=thibault
-Group=thibault
-Restart=always
+## License
+lichess-bot is licensed under the AGPLv3 (or any later version at your option). Check out the [LICENSE file](https://github.com/lichess-bot-devs/lichess-bot/blob/master/LICENSE) for the full text.
 
-[Install]
-WantedBy=multi-user.target
-```
-
-# Acknowledgements
-Thanks to the Lichess team, especially T. Alexander Lystad and Thibault Duplessis for working with the LeelaChessZero
-team to get this API up. Thanks to the Niklas Fiekas and his [python-chess](https://github.com/niklasf/python-chess) code which allows engine communication seamlessly.
-
-# License
-lichess-bot is licensed under the AGPLv3 (or any later version at your option). Check out LICENSE.txt for the full text.
+## Citation
+If this software has been used for research purposes, please cite it using the "Cite this repository" menu on the right sidebar. For more information, check the [CITATION file](https://github.com/lichess-bot-devs/lichess-bot/blob/master/CITATION.cff).
